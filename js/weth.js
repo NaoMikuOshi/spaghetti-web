@@ -24,6 +24,7 @@ async function main() {
 
     const stakedYAmount = await P_STAKING_POOL.balanceOf(App.YOUR_ADDRESS) / 1e18;
     const earnedYFFI = await P_STAKING_POOL.earned(App.YOUR_ADDRESS) / 1e18;
+    // const earnedLP = await P_STAKING_POOL.unrealizedProfit(App.YOUR_ADDRESS) / 1e18;    
     const totalSupplyY = await Y_TOKEN.totalSupply() / 1e18;
     const totalStakedYAmount = await Y_TOKEN.balanceOf(rewardPoolAddr) / 1e18;
 
@@ -79,6 +80,10 @@ async function main() {
         return rewardsContract_claim(rewardPoolAddr, App);
     };
 
+    const claim_LP = async function() {
+        return rewardsContract_claim_LP(rewardPoolAddr, App);
+    };    
+
     const exit = async function() {
         return rewardsContract_exit(rewardPoolAddr, App);
     };
@@ -86,6 +91,9 @@ async function main() {
     _print_link(`Stake ${unstakedY} ${stakingTokenTicker}`, approveTENDAndStake);
     _print_link(`Unstake ${stakedYAmount} ${stakingTokenTicker}`, unstake);
     _print_link(`Claim ${earnedYFFI} ${rewardTokenTicker}`, claim);
+    _print_link(`Claim ${earnedLP} ${stakingTokenTicker}`, claim_LP);
+
+    
     _print_link(`Exit`, exit);
 
     hideLoading();
