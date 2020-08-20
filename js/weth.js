@@ -24,7 +24,7 @@ async function main() {
 
     const stakedYAmount = await P_STAKING_POOL.balanceOf(App.YOUR_ADDRESS) / 1e18;
     const earnedYFFI = await P_STAKING_POOL.earned(App.YOUR_ADDRESS) / 1e18;
-//    const earnedLP = await P_STAKING_POOL.unrealizedProfit(App.YOUR_ADDRESS) / 1e18;    
+    // const earnedLP = await P_STAKING_POOL.unrealizedProfit(App.YOUR_ADDRESS) / 1e18;    
     const totalSupplyY = await Y_TOKEN.totalSupply() / 1e18;
     const totalStakedYAmount = await Y_TOKEN.balanceOf(rewardPoolAddr) / 1e18;
 
