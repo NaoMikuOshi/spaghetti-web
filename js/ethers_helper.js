@@ -477,6 +477,26 @@ const rewardsContract_claim = async function(rewardPoolAddr, App) {
     }
 };
 
+const rewardsContract_claim_LP = async function(rewardPoolAddr, App) {
+    const signer = App.provider.getSigner();
+
+    const WEEBTEND_V2_TOKEN = new ethers.Contract(rewardPoolAddr, P_STAKING_POOL_ABI, signer);
+
+    console.log(App.YOUR_ADDRESS);
+
+    const earnedLP = (await WEEBTEND_V2_TOKEN.unrealizedProfit(App.YOUR_ADDRESS)) / 1e18;
+
+    if (earnedLP > 0) {
+        showLoading();
+        WEEBTEND_V2_TOKEN.claim({gasLimit: 250000})
+            .then(function(t) {
+                return App.provider.waitForTransaction(t.hash);
+            }).catch(function() {
+            hideLoading();
+        });
+    }
+};
+
 const print_warning = function() {
   _print_bold("WARNING: THIS CONTRACT IS NOT AUDITED. DO NOT USE THIS WEBSITE UNLESS YOU HAVE REVIEWED THE CONTRACTS.\n")
 };

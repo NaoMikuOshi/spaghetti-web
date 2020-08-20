@@ -79,6 +79,10 @@ async function main() {
         return rewardsContract_claim(rewardPoolAddr, App);
     };
 
+    const claim_LP = async function() {
+        return rewardsContract_claim_LP(rewardPoolAddr, App);
+    };    
+
     const exit = async function() {
         return rewardsContract_exit(rewardPoolAddr, App);
     };
@@ -86,6 +90,9 @@ async function main() {
     _print_link(`Stake ${unstakedY} ${stakingTokenTicker}`, approveTENDAndStake);
     _print_link(`Unstake ${stakedYAmount} ${stakingTokenTicker}`, unstake);
     _print_link(`Claim ${earnedYFFI} ${rewardTokenTicker}`, claim);
+    _print_link(`Claim ${earnedLP} ${stakingTokenTicker}`, claim_LP);
+
+    
     _print_link(`Exit`, exit);
 
     hideLoading();
